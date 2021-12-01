@@ -1,0 +1,17 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+
+@{
+	var latestArticle = Umbraco.Content(Guid.Parse("b0506114-8e09-48b1-822e-f5e94857d070"))
+    .Descendants()
+    .Where(x => x.IsVisible())
+    .OrderByDescending(x => x.UpdateDate).FirstOrDefault();
+}
+
+@latestArticle.Value("title")
+@latestArticle.Value("content")

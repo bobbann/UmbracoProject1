@@ -1,0 +1,22 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.NewsArticles>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "Master.cshtml";
+}
+
+@{
+	var selection = Umbraco.Content(Guid.Parse("3528c3c3-62df-4212-8db3-dc97c3fdfef4"))
+    .Children()
+    .Where(x => x.IsVisible())
+    .OrderByDescending(x => x.UpdateDate);
+}
+<ul>
+	@foreach (var item in selection)
+	{
+		<li>
+			<a href="@item.Url()">@item.Name()</a>
+		</li>
+	}
+</ul>
+
